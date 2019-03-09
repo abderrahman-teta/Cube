@@ -2,13 +2,13 @@ var serialport = require('serialport');
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-function wirteToPort(message,phone_no){
+async function wirteToPort(message,phone_no){
     let serial = new serialport('COM10', {
            baudRate:9600,
            autoOpen:false
        });
        
-       serial.open(err => {
+     await  serial.open(err => {
              if (err)  console.log(err);
              serial.write("AT+CMGF=1");
              serial.write('\r');
